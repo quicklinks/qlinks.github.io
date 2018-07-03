@@ -1,55 +1,118 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<meta charset="utf-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
 	<meta name="author" content="Benz Rodrigo">
-	<title>QLinks</title>
-	<style>
-	body {
-		font: 12px 'Helvetica Neue', Helvetica, Arial, freesans, clean, sans-serif;
-		color: #333;
-	}
-	h1 {
-		font-size: 20px;
-	}
-	a {
-		color: #666;
-	}
-	form {
-		padding: 20px; 
-		text-align: center;
-	}
-	strong {
-		color: #333;
-		background-color: #FAFFA6;
-		padding: 0.1em;
-	}
-	#footer {
-		margin: 20px 0;
-		font-size: 10px;
-		color: #666;
-	}
-	</style>
+	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" >
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>BiWeekly</title>
 </head>
+
 <body>
 	<form id="previewform" action="">
-		<a href="https://github.com/qlinks"><h2>QLinks</h2></a>
-		<p><a href="https://eis.alorica.net/" target="_blank">EIS</a>&nbsp;
-		<a href="http://mycsp.web.att.com/mycspportal/" target="_blank">MY CSP</a>&nbsp;
-		<a href="http://captraining.stage.att.com/wps/myportal/UCPHome" target="_blank">CAP-Train</a>&nbsp;
-		<a href="http://172.30.50.51/dtvtrecommunications_enu/start.swe" target="_blank">RIO-Train</a>&nbsp;
-		<a href="https://trn.oms.directv.com/login.aspx" target="_blank">OMS-Train</a>&nbsp;
-		<a href="https://test.salesforce.com/" target="_blank">Shopping Cart</a>&nbsp;
-		<a href="http://mcsinitialtraining.web.att.com:8110/ncportal/roles/dbs-pplan-st/index.html" target="_blank">CLC</a></p>
-		<p><a href="http://support.directv.com" target="_blank">DTV-Supt</a>&nbsp;
-		<a href="http://mcsinitialtraining.web.att.com:8110/ncportal/content/DBS/Source_Files/DIRECTV_Product_Tool_Core/Product_Tool/Product_Tool_Integration.htm" target="_blank">DTV-Prod Tool</a>&nbsp;
-		<a href="http://mycsp.web.att.com/mycspportal/tools/lookups/lookups.htm" target="_blank">Data-Lookup Tool</a>&nbsp;
-		<a href="http://mycsp.web.att.com/mycspportal/tools/htbf/howto.htm" target="_blank">How-To Tool</a></p>
-		<p><a href="https://github.com/qlinks/qlinks.github.io/upload/master/uploads" target="_blank">Upload Here</a>&nbsp;
-		<a href="https://github.com/benzfiles/benzfiles.github.com/tree/master/doc" target="_blank">Docs</a>&nbsp;
-		<a href="https://github.com/benzfiles/benzfiles.github.com/blob/master/doc/1130807-Cebu%202%20Wave%2044%20Training%20Logins%20and%20Accounts.xlsx?raw=true">1130807</a></p>
-	</form>
-	<script src="/htmlpreview.min.js"></script>
-	<script>HTMLPreview.init();</script>
-</body>
+	<form name="salarycal" mebthod="post">
+	<label type="text" ><b>BASIC PAY:</b</label><input type="number" name="basicPay" placeholder="$ 0.00" width="30%">
+		<input onClick="paycal();" name="calBtn" id="calBtn" type="button" value="Calculate">
+
+<!-- Input Days Worked -->
+	<fieldset type="text"> <legend type="text"><b>Hours/Days Worked</b></legend>
+	<table>
+		<tr> <td align="left" colSpan="2" width="40%"><b>Total Days Worked:</b></td>
+                <td align="right" colSpan="1"><input type="number" name="regDays" placeholder="(Days)" width="30%"></td>
+		<tr><td align="left" colSpan="2" width="40%"><b>Night Differential:</b></td>
+                <td align="right" colSpan="1"><input type="number" name="nDiffInput" placeholder="(Hours)" width="30%"></td>
+		</table>	
+	</fieldset>
+
+<!-- Input Holidays Days Worked -->
+	<fieldset type="text"> <legend type="text"><b>Holidays</b></legend>
+	<table>
+		<tr> <td align="left" colSpan="2" width="40%"><b>Regular:</b></td>
+                <td align="right" colSpan="1"><input type="number" name="hDayRegInput" placeholder="(Days)" width="30%"></td>
+		<td align="right" colSpan="1"><input type="number" name="nDiffHDayRegInput" placeholder="(NDiff Hours)" width="30%"></td>
+		<tr> <td align="left" colSpan="2" width="40%"><b>Special:</b></td>
+                <td align="right" colSpan="1"><input type="number" name="hDaySpclInput" placeholder="(Days)" width="30%"></td>
+		</table>
+	</fieldset>
+
+<!-- Show Result Computation -->
+	<fieldset type="text"> <legend type="text"><b>Gross Earnings</b></legend>
+	<table>
+		<tr><td align="left" colSpan="2">
+                Daily Rate: <input type="numb" name="rateDaily" readonly>&nbsp;
+                Hourly Rate: <input type="numb" name="rateHourly" readonly></td>
+		<tr><td align="left" colSpan="2">Total Hours Worked:
+			<input type="numb" name="totalRegHours" readonly>&nbsp;
+			$<input type="numb" name="payRegHours" readonly></td>
+
+		<tr><td align="left" colSpan="2">N.Diff-Reg Rate:
+			<input type="numb" name="rateNDiff" readonly>&nbsp;
+			$<input type="numb" name="payNDiff" readonly></td>
+		<tr><td align="left" colSpan="2">Holiday Reg: $<input type="numb" name="payHDayReg" readonly></td>
+		<tr><td align="left" colSpan="2">N.Diff-Holiday Reg Rate:
+			<input type="numb" name="rateNDiffHDayR" readonly>&nbsp;
+			$<input type="numb" name="payNDiffHDayR" readonly></td>
+		<tr><td align="left" colSpan="2">Holiday Special: $<input type="numb" name="payHDaySpcl" readonly></td>
+		<tr><td align="left" colSpan="1">----------Gross Total:</td>
+			<td align="right" colSpan="1">$<input type="numb" name="payGrossTotal" readonly></td>
+		</tr>
+		</table>
+	</fieldset>
+	</form>		
+</fomm>	
+<Script language="JavaScript">
+	function paycal() {
+		basicAnn=document.salarycal.basicPay.value*12/26;
+		getRateDaily=basicAnn/10;
+		getHourlyRate=getRateDaily/8;
+		getTotalHours=document.salarycal.regDays.value*8;
+		document.salarycal.rateDaily.value=getRateDaily;
+		document.salarycal.rateHourly.value=getHourlyRate;
+		document.salarycal.totalRegHours.value=getTotalHours;
+		getRateNDiff=getHourlyRate*.20;
+		getRateNDiffHdayR=getHourlyRate*.40;
+		getRateHDaySpcl=getRateDaily*.20;
+		document.salarycal.rateNDiff.value=getRateNDiff;
+		document.salarycal.rateNDiffHDayR.value=getRateNDiffHdayR;
+		grossPayHours=getTotalHours*getHourlyRate;
+		document.salarycal.payRegHours.value=grossPayHours;
+		grosspayNDiff=document.salarycal.nDiffInput.value*getRateNDiff;
+		document.salarycal.payNDiff.value=grosspayNDiff;
+		grosspayHDayReg=document.salarycal.hDayRegInput.value*getRateDaily;
+		document.salarycal.payHDayReg.value=grosspayHDayReg;
+		grosspayNDiffHdayR=document.salarycal.nDiffHDayRegInput.value*getRateNDiffHdayR;
+		document.salarycal.payNDiffHDayR.value=grosspayNDiffHdayR;
+		grosspayHDaySpcl=document.salarycal.hDaySpclInput.value*getRateHDaySpcl;
+		document.salarycal.payHDaySpcl.value=grosspayHDaySpcl;
+		totalGrossNDiff=grosspayNDiff+grosspayNDiffHdayR;
+		totalGrossHday=grosspayHDayReg+grosspayHDaySpcl
+		totalGross=grossPayHours+totalGrossNDiff+totalGrossHday;
+		document.salarycal.payGrossTotal.value=totalGross;
+		}
+</script>
+
+<script>
+	function regWorkDay() {
+		var basicPay = document.salarycal.basicPay.value;
+		var regHours = document.salarycal.regDays.value*8;
+			rateDaily = basicPay*12/26/10;
+			rateHourly = rateDaily/8;
+			payRegHours = regHours*rateHourly;
+		document.salarycal.rateDaily.value = rateDaily;
+		document.salarycal.rateHourly.value = rateDaily;
+		document.salarycal.totalRegHours.value = payRegHours;
+		}
+	function holidayWork() {
+		}
+	var $ = function (id) {
+		return document.getElementById(id);
+		}
+	var calculate_click = function () {
+		}
+		$("calBtn").onclick = function(){calculate_click();};
+		$("basicPay").focus();
+</script>
+		<script src="/htmlpreview.min.js"></script>
+		<script>HTMLPreview.init();</script>
+	</body>
 </html>
